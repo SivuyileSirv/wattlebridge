@@ -1,0 +1,34 @@
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+
+# WordPress runtime content
+app/wp-content/uploads/
+app/wp-content/cache/
+app/wp-content/upgrade/
+app/wp-content/backup*/
+
+# Dependencies
+**/node_modules/
+**/vendor/
+
+# Generated front-end assets
+**/assets/dist/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs, database exports and archives
+*.log
+*.sql
+*.sql.gz
+*.zip
+
+# Private keys
+*.pem
+*.key

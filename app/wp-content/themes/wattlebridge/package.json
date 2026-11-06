@@ -1,0 +1,26 @@
+{
+  "name": "wattlebridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Custom WordPress theme for Wattlebridge Technical Recruitment",
+  "scripts": {
+    "css:compile": "sass assets/scss/main.scss assets/dist/main.css --style=expanded --no-source-map",
+    "css:prefix": "postcss assets/dist/main.css --replace",
+    "build": "npm run css:compile && npm run css:prefix",
+    "dev": "sass --watch assets/scss/main.scss:assets/dist/main.css --no-source-map"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "browserslist": [
+    "defaults",
+    "not dead"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.6.2",
+    "concurrently": "^10.0.6",
+    "postcss": "^8.5.32",
+    "postcss-cli": "^12.0.0",
+    "sass": "^1.107.1"
+  }
+}

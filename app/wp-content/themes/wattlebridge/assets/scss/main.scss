@@ -1,0 +1,15 @@
+@use "abstracts/variables";
+
+:root {
+  --color-forest: #173d36;
+  --color-sage: #7d9686;
+  --color-ivory: #f5f3ed;
+  --color-ink: #26332f;
+  --color-brass: #b59964;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
+}

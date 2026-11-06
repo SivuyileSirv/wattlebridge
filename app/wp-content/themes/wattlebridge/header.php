@@ -1,13 +1,4 @@
-<?php
-/**
- * Site header.
- *
- * @package Wattlebridge
- */
-
-defined('ABSPATH') || exit;
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
@@ -24,11 +15,23 @@ defined('ABSPATH') || exit;
   </a>
 
   <header class="site-header">
-    <div class="site-container">
-      <p class="site-header__brand">
-        <a href="<?php echo esc_url(home_url('/')); ?>">
-          <?php echo esc_html(get_bloginfo('name')); ?>
-        </a>
-      </p>
+    <div class="container">
+      <a class="site-header__brand" href="<?php echo esc_url(home_url('/')); ?>">
+        <?php echo esc_html(get_bloginfo('name')); ?>
+      </a>
+
+      <?php if (has_nav_menu('primary')): ?>
+        <nav class="site-header__nav" aria-label="<?php esc_attr_e('Primary navigation', 'wattlebridge'); ?>">
+          <?php
+          wp_nav_menu(
+            array(
+              'theme_location' => 'primary',
+              'container' => false,
+              'menu_class' => 'site-header__menu',
+            )
+          );
+          ?>
+        </nav>
+      <?php endif; ?>
     </div>
   </header>

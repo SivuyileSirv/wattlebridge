@@ -1,20 +1,17 @@
 <?php
 /**
- * Default template fallback.
+ * Default theme template.
  *
  * @package Wattlebridge
  */
 
-defined('ABSPATH') || exit;
-
 get_header();
 ?>
 
-<main id="main-content">
-  <div class="site-container">
-    <h1>
-      <?php esc_html_e('Wattlebridge Technical Recruitment', 'wattlebridge'); ?>
-    </h1>
+<main id="main-content" class="site-main">
+  <div class="container">
+    <h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
+
     <p>
       <?php esc_html_e('Custom WordPress theme initialized successfully.', 'wattlebridge'); ?>
     </p>

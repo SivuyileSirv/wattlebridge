@@ -1,15 +1,56 @@
-@use "abstracts/variables";
+// ============================================================
+// WATTLEBRIDGE — MAIN STYLESHEET
+// ============================================================
+
+// ------------------------------------------------------------
+// 1. Sass configuration
+// ------------------------------------------------------------
+
+@use "abstracts/variables" as vars;
+
+// ------------------------------------------------------------
+// 2. Base styles
+// ------------------------------------------------------------
+
+@use "base/reset";
+@use "base/typography";
+@use "base/accessibility";
+
+// ------------------------------------------------------------
+// 3. Layout foundations
+// ------------------------------------------------------------
+
+@use "layout/container";
+
+// ------------------------------------------------------------
+// 4. Global design tokens
+// ------------------------------------------------------------
 
 :root {
-  --color-forest: #173d36;
-  --color-sage: #7d9686;
-  --color-ivory: #f5f3ed;
-  --color-ink: #26332f;
-  --color-brass: #b59964;
+  // Brand colours
+  --color-forest: #{vars.$color-forest};
+  --color-sage: #{vars.$color-sage};
+  --color-ivory: #{vars.$color-ivory};
+  --color-ink: #{vars.$color-ink};
+  --color-brass: #{vars.$color-brass};
+
+  // Layout
+  --container-max: #{vars.$container-max};
+
+  // Motion
+  --transition-fast: #{vars.$transition-fast};
+  --transition-standard: #{vars.$transition-standard};
 }
 
+// ------------------------------------------------------------
+// 5. Global page appearance
+// ------------------------------------------------------------
+
 body {
-  margin: 0;
   background-color: var(--color-ivory);
   color: var(--color-ink);
+}
+
+.site-main {
+  min-height: 40vh;
 }

@@ -1,0 +1,52 @@
+// ============================================================
+// WATTLEBRIDGE — BASE RESET
+// ============================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+}
+
+// Responsive media
+img,
+picture,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+// Inherit typography in form controls
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+}
+
+// Respect the HTML hidden attribute
+[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,39 @@
+// ============================================================
+// WATTLEBRIDGE — ACCESSIBILITY
+// ============================================================
+
+@use "../abstracts/mixins" as mixins;
+
+// Skip navigation link
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  z-index: 9999;
+
+  padding: 0.875rem 1.25rem;
+
+  background-color: var(--color-forest);
+  color: var(--color-ivory);
+
+  font-weight: 700;
+  text-decoration: none;
+
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: translateY(1rem);
+}
+
+// Visible keyboard focus
+:focus-visible {
+  @include mixins.focus-ring;
+}
+
+// Reduce nonessential motion when requested
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}

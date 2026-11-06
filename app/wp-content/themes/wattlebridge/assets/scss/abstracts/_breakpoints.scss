@@ -1,0 +1,26 @@
+// ============================================================
+// WATTLEBRIDGE — RESPONSIVE BREAKPOINTS
+// ============================================================
+
+@use "sass:map";
+
+$breakpoints: (
+  tablet: 48rem,
+  // 768px
+  desktop: 64rem,
+  // 1024px
+  wide: 90rem, // 1440px
+);
+
+// Mobile-first breakpoint mixin
+@mixin up($name) {
+  $value: map.get($breakpoints, $name);
+
+  @if $value == null {
+    @error "Unknown breakpoint: #{$name}";
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}

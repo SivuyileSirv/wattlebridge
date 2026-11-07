@@ -1,0 +1,63 @@
+// ============================================================
+// WATTLEBRIDGE — GLOBAL BUTTONS
+// ============================================================
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  min-height: 3.25rem;
+  padding: 0.85rem 1.65rem;
+
+  border: 1.5px solid transparent;
+  border-radius: 9999px;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  // No hover effects or transitions for now.
+
+  &:focus-visible {
+    outline: 3px solid var(--color-brass);
+    outline-offset: 4px;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      display: block;
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+  }
+
+  &--primary {
+    background-color: var(--color-brass);
+    border-color: var(--color-brass);
+    color: var(--color-ink);
+  }
+
+  &--outline-light {
+    background-color: transparent;
+    border-color: var(--color-ivory);
+    color: var(--color-ivory);
+  }
+
+  &--outline-dark {
+    background-color: transparent;
+    border-color: var(--color-forest);
+    color: var(--color-forest);
+  }
+}

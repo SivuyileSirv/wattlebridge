@@ -5,17 +5,29 @@
  * @package Wattlebridge
  */
 
+defined('ABSPATH') || exit;
+
 get_header();
 ?>
 
 <main id="main-content" class="site-main">
-  <div class="container">
-    <h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
 
-    <p>
-      <?php esc_html_e('Wattlebridge homepage is rendering successfully.', 'wattlebridge'); ?>
-    </p>
-  </div>
+  <?php
+  // Fixed homepage hero — always rendered first.
+  get_template_part('template-parts/sections/hero');
+  ?>
+
+  <?php
+  /**
+   * Reorderable homepage sections will be rendered here.
+   *
+   * Future SCF Flexible Content field:
+   * homepage_sections
+   *
+   * The hero will remain outside that loop.
+   */
+  ?>
+
 </main>
 
 <?php

@@ -21,9 +21,22 @@
 // ------------------------------------------------------------
 
 @use "layout/container";
+@use "layout/header";
 
 // ------------------------------------------------------------
-// 4. Global design tokens
+// 4. Reusable components
+// ------------------------------------------------------------
+
+@use "components/button";
+
+// ------------------------------------------------------------
+// 5. Page sections
+// ------------------------------------------------------------
+
+@use "sections/hero";
+
+// ------------------------------------------------------------
+// 6. Global design tokens
 // ------------------------------------------------------------
 
 :root {
@@ -37,13 +50,16 @@
   // Layout
   --container-max: #{vars.$container-max};
 
+  // Single source of truth for horizontal page spacing
+  --space-gutter: clamp(1.25rem, 5vw, 5rem);
+
   // Motion
   --transition-fast: #{vars.$transition-fast};
   --transition-standard: #{vars.$transition-standard};
 }
 
 // ------------------------------------------------------------
-// 5. Global page appearance
+// 7. Global page appearance
 // ------------------------------------------------------------
 
 body {

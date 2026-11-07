@@ -1,39 +1,56 @@
 <?php
 /**
- * Front-end stylesheet registration.
+ * Enqueue theme assets.
  *
  * @package Wattlebridge
  */
 
-defined('ABSPATH') || exit;
+if (!defined('ABSPATH')) {
+  exit;
+}
 
 /**
- * Load the theme stylesheet.
+ * Register frontend assets.
  *
  * @return void
  */
-function wattlebridge_enqueue_assets(): void
+function wattlebridge_enqueue_assets()
 {
-  $theme_version = wp_get_theme()->get('Version');
-  $css_path = '/assets/dist/main.css';
-  $css_file = get_theme_file_path($css_path);
+  $theme_dir = get_template_directory();
+  $theme_uri = get_template_directory_uri();
 
-  if (is_file($css_file) && filesize($css_file) > 0) {
+  $compiled_css = '/assets/dist/main.css';
+  $fallback_css = '/style.css';
+
+  if (
+    file_exists($theme_dir . $compiled_css) &&
+    filesize($theme_dir . $compiled_css) > 0
+  ) {
     wp_enqueue_style(
       'wattlebridge-main',
-      get_theme_file_uri($css_path),
+      $theme_uri . $compiled_css,
       array(),
-      (string) filemtime($css_file)
+      (string) filemtime($theme_dir . $compiled_css)
     );
-
-    return;
+  } else {
+    wp_enqueue_style(
+      'wattlebridge-main',
+      $theme_uri . $fallback_css,
+      array(),
+      (string) filemtime($theme_dir . $fallback_css)
+    );
   }
 
-  wp_enqueue_style(
-    'wattlebridge-style',
-    get_stylesheet_uri(),
-    array(),
-    $theme_version
-  );
+  $main_js = '/assets/js/main.js';
+
+  if (file_exists($theme_dir . $main_js)) {
+    wp_enqueue_script_module(
+      'wattlebridge/main',
+      $theme_uri . $main_js,
+      array(),
+      (string) filemtime($theme_dir . $main_js)
+    );
+  }
 }
+
 add_action('wp_enqueue_scripts', 'wattlebridge_enqueue_assets');

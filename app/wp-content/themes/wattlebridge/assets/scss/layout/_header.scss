@@ -1,0 +1,346 @@
+// ============================================================
+// WATTLEBRIDGE — SITE HEADER
+// ============================================================
+
+.site-header {
+  --header-offset: 0px;
+
+  position: fixed;
+  top: var(--header-offset);
+  left: 0;
+  z-index: 1000;
+
+  width: 100%;
+  padding: 0;
+
+  transition: padding var(--transition-standard);
+
+  // ----------------------------------------------------------
+  // WordPress admin toolbar
+  // ----------------------------------------------------------
+
+  .admin-bar & {
+    --header-offset: 46px;
+  }
+
+  @media (min-width: 783px) {
+    .admin-bar & {
+      --header-offset: 32px;
+    }
+  }
+
+  // ----------------------------------------------------------
+  // Header shell
+  // ----------------------------------------------------------
+
+  &__shell {
+    width: 100%;
+
+    border: 1px solid transparent;
+    border-radius: 0;
+
+    background-color: transparent;
+    box-shadow: none;
+
+    transition:
+      background-color var(--transition-standard),
+      border-color var(--transition-standard),
+      border-radius var(--transition-standard),
+      box-shadow var(--transition-standard);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1rem, 2vw, 2rem);
+
+    min-height: 5.5rem;
+
+    transition: min-height var(--transition-standard);
+  }
+
+  // ----------------------------------------------------------
+  // Branding
+  // ----------------------------------------------------------
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    max-width: 100%;
+    text-decoration: none;
+  }
+
+  &__logo {
+    display: block;
+
+    width: clamp(11.25rem, 18vw, 15rem);
+    max-width: 100%;
+    height: auto;
+  }
+
+  // ----------------------------------------------------------
+  // Desktop navigation
+  // ----------------------------------------------------------
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+  }
+
+  // ----------------------------------------------------------
+  // Navigation links
+  // ----------------------------------------------------------
+
+  &__menu a {
+    position: relative;
+    display: inline-block;
+
+    padding-block: 0.75rem;
+
+    color: var(--color-ivory);
+    font-size: 0.95rem;
+    font-weight: 400;
+    text-decoration: none;
+
+    // Text colour stays unchanged on hover.
+  }
+
+  // Underline — hidden by default
+  &__menu a::after {
+    position: absolute;
+    right: 0;
+    bottom: 0.25rem;
+    left: 0;
+
+    height: 2px;
+    border-radius: 9999px;
+
+    background-color: var(--color-brass);
+    content: "";
+
+    transform: scaleX(0);
+    transform-origin: left center;
+
+    transition: transform 300ms ease;
+  }
+
+  // Hover and keyboard focus — animate left to right
+  &__menu a:hover::after,
+  &__menu a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  // Active page — underline remains visible
+  &__menu .current-menu-item > a::after,
+  &__menu .current_page_item > a::after,
+  &__menu .current-menu-ancestor > a::after {
+    transform: scaleX(1);
+  }
+
+  // Text colour stays Ivory in every interaction state
+  &__menu a:hover,
+  &__menu a:focus-visible,
+  &__menu .current-menu-item > a,
+  &__menu .current_page_item > a {
+    color: var(--color-ivory);
+  }
+
+  // ----------------------------------------------------------
+  // Header CTA — uses global button styles
+  // ----------------------------------------------------------
+
+  &__cta {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  // ----------------------------------------------------------
+  // Floating state — activated by JavaScript on scroll
+  // ----------------------------------------------------------
+
+  &.is-scrolled {
+    padding: 0.75rem var(--space-gutter);
+  }
+
+  &.is-scrolled &__shell {
+    border-color: rgb(181 153 100 / 20%);
+    border-radius: 9999px;
+
+    background-color: rgb(23 61 54 / 86%);
+
+    box-shadow:
+      0 12px 35px rgb(0 0 0 / 16%),
+      inset 0 1px 0 rgb(255 255 255 / 8%);
+
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  &.is-scrolled &__inner {
+    min-height: 4.5rem;
+  }
+
+  // ----------------------------------------------------------
+  // Mobile navigation toggle
+  // ----------------------------------------------------------
+
+  &__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+
+    border: 1px solid var(--color-brass);
+    border-radius: 9999px;
+
+    background-color: transparent;
+    color: var(--color-ivory);
+
+    cursor: pointer;
+  }
+
+  &__toggle-line {
+    display: block;
+
+    width: 20px;
+    height: 2px;
+
+    background-color: currentColor;
+
+    transition:
+      transform var(--transition-fast),
+      opacity var(--transition-fast);
+  }
+
+  // ----------------------------------------------------------
+  // Tablet and mobile
+  // ----------------------------------------------------------
+
+  @media (max-width: 63.999rem) {
+    &__inner {
+      min-height: 4.75rem;
+    }
+
+    &.is-scrolled &__inner {
+      min-height: 4.25rem;
+    }
+
+    &__toggle {
+      display: flex;
+    }
+
+    &__navigation {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: var(--space-gutter);
+      left: var(--space-gutter);
+      z-index: 10;
+
+      display: none;
+      align-items: stretch;
+      flex-direction: column;
+      gap: 1.25rem;
+
+      padding: 1.5rem;
+
+      border: 1px solid rgb(181 153 100 / 25%);
+      border-radius: 0.75rem;
+
+      background-color: rgb(23 61 54 / 97%);
+
+      box-shadow: 0 15px 35px rgb(0 0 0 / 18%);
+    }
+
+    &.is-menu-open &__navigation {
+      display: flex;
+    }
+
+    &__menu {
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    &__menu a {
+      display: block;
+      padding: 0.65rem 0;
+    }
+
+    // Keep the underline aligned with each menu item
+    &__menu a::after {
+      right: auto;
+      width: 100%;
+    }
+
+    &__cta {
+      width: 100%;
+    }
+
+    // Hamburger animation
+    &.is-menu-open &__toggle-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    &.is-menu-open &__toggle-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    &.is-menu-open &__toggle-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  // ----------------------------------------------------------
+  // WordPress admin toolbar on narrow screens
+  // ----------------------------------------------------------
+
+  @media (max-width: 782px) {
+    .admin-bar & {
+      --header-offset: 0px;
+    }
+  }
+
+  // ----------------------------------------------------------
+  // Reduced motion
+  // ----------------------------------------------------------
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &__shell,
+    &__inner,
+    &__toggle-line,
+    &__menu a::after {
+      transition: none;
+    }
+  }
+}
+
+// ------------------------------------------------------------
+// Temporary contrast for unfinished internal pages
+// ------------------------------------------------------------
+// Remove when their hero sections have been implemented.
+
+body:not(.home) .site-header:not(.is-scrolled) .site-header__shell {
+  background-color: var(--color-forest);
+}

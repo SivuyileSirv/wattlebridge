@@ -3,12 +3,11 @@
 // ============================================================
 
 .container {
-  width: min(100% - 2 * var(--space-gutter), var(--container-max));
-
+  width: calc(100% - (2 * var(--space-gutter)));
+  max-width: var(--container-max);
   margin-inline: auto;
 }
 
-// Narrow container for text-heavy sections
 .container--narrow {
   max-width: 52rem;
 }

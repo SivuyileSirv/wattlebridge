@@ -55,6 +55,7 @@ services:
     volumes:
       - wordpress_data:/var/www/html
       - ./app/wp-content/themes/wattlebridge:/var/www/html/wp-content/themes/wattlebridge
+      - ./.docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
 
     networks:
       - backend

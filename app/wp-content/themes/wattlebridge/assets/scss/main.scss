@@ -13,6 +13,7 @@
 // ------------------------------------------------------------
 
 @use "base/reset";
+@use "base/fonts";
 @use "base/typography";
 @use "base/accessibility";
 
@@ -22,6 +23,7 @@
 
 @use "layout/container";
 @use "layout/header";
+@use "layout/footer";
 
 // ------------------------------------------------------------
 // 4. Reusable components
@@ -33,7 +35,17 @@
 // 5. Page sections
 // ------------------------------------------------------------
 
+// Hero section
 @use "sections/hero";
+
+// Approach section
+@use "sections/approach";
+
+// Services section
+@use "sections/services";
+
+// Pathways section
+@use "sections/pathways";
 
 // ------------------------------------------------------------
 // 6. Global design tokens
@@ -47,11 +59,18 @@
   --color-ink: #{vars.$color-ink};
   --color-brass: #{vars.$color-brass};
 
-  // Layout
+  // Global horizontal layout
   --container-max: #{vars.$container-max};
 
-  // Single source of truth for horizontal page spacing
-  --space-gutter: clamp(1.25rem, 5vw, 5rem);
+  // Fluid horizontal gutters
+  --space-gutter: clamp(1.25rem, 4.5vw, 4rem);
+
+  // Standard vertical section spacing
+  --section-padding-block: clamp(4rem, 7vw, 6.5rem);
+
+  // Hero spacing
+  --hero-padding-top: clamp(7rem, 13vh, 10rem);
+  --hero-padding-bottom: clamp(4rem, 7vh, 6rem);
 
   // Motion
   --transition-fast: #{vars.$transition-fast};
@@ -59,7 +78,25 @@
 }
 
 // ------------------------------------------------------------
-// 7. Global page appearance
+// 7. Global section foundation
+// ------------------------------------------------------------
+
+.section {
+  padding-block: var(--section-padding-block);
+}
+
+// ------------------------------------------------------------
+// 8. Responsive vertical spacing
+// ------------------------------------------------------------
+
+@media (max-width: 47.999rem) {
+  :root {
+    --section-padding-block: 3.5rem;
+  }
+}
+
+// ------------------------------------------------------------
+// 9. Global page appearance
 // ------------------------------------------------------------
 
 body {

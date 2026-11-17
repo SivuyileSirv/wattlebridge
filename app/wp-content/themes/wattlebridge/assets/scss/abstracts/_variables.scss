@@ -2,19 +2,40 @@
 // WATTLEBRIDGE — DESIGN VARIABLES
 // ============================================================
 
+// ------------------------------------------------------------
 // Brand colours
+// ------------------------------------------------------------
+
 $color-forest: #173d36;
 $color-sage: #7d9686;
 $color-ivory: #f5f3ed;
 $color-ink: #26332f;
 $color-brass: #b59964;
 
+// ------------------------------------------------------------
 // Layout
-$container-max: 75rem; // 1200px at a 16px root font size
+// ------------------------------------------------------------
 
+// Maximum width of the shared content container.
+// 1200px at a 16px root font size.
+$container-max: 75rem;
+
+// Horizontal gutters are controlled globally in main.scss.
+// --space-gutter: clamp(1.25rem, 4.5vw, 4rem);
+
+// ------------------------------------------------------------
 // Typography
-$font-family-body: Arial, Helvetica, sans-serif;
+// ------------------------------------------------------------
 
+// Editorial heading font.
+$font-family-heading: "DM Serif Display", Georgia, serif;
+
+// Corporate body and interface font.
+$font-family-body: "DM Sans", Arial, Helvetica, sans-serif;
+
+// ------------------------------------------------------------
 // Motion
+// ------------------------------------------------------------
+
 $transition-fast: 180ms ease;
 $transition-standard: 300ms ease;

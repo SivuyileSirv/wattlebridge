@@ -2,35 +2,81 @@
 // WATTLEBRIDGE — BASE RESET
 // ============================================================
 
+// ------------------------------------------------------------
+// 1. Universal box sizing
+// ------------------------------------------------------------
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+// ------------------------------------------------------------
+// 2. Document foundations
+// ------------------------------------------------------------
+
 html {
+  width: 100%;
+  max-width: 100%;
+
   -webkit-text-size-adjust: 100%;
+
+  // Prevent accidental horizontal page scrolling.
+  overflow-x: clip;
 }
 
 body {
-  min-width: 320px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 0;
+
+  // Do not impose a minimum viewport width.
+  overflow-x: clip;
 }
 
-// Responsive media
+// ------------------------------------------------------------
+// 3. Responsive media
+// ------------------------------------------------------------
+
 img,
 picture,
 video,
+canvas,
 svg {
   display: block;
   max-width: 100%;
 }
 
-img {
+img,
+video {
   height: auto;
 }
 
-// Inherit typography in form controls
+// Prevent embedded content from exceeding its container.
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
+// ------------------------------------------------------------
+// 4. Text overflow protection
+// ------------------------------------------------------------
+
+// Allow long words, URLs and addresses to wrap when needed.
+p,
+li,
+address {
+  overflow-wrap: break-word;
+}
+
+// ------------------------------------------------------------
+// 5. Form controls
+// ------------------------------------------------------------
+
+// Inherit typography from the global typography system.
 button,
 input,
 textarea,
@@ -43,10 +89,27 @@ button {
 }
 
 textarea {
+  max-width: 100%;
   resize: vertical;
 }
 
-// Respect the HTML hidden attribute
+// ------------------------------------------------------------
+// 6. Layout shrink protection
+// ------------------------------------------------------------
+
+// Allow primary layout containers to shrink within the viewport.
+.container,
+.site-main,
+.site-header,
+.site-footer {
+  min-width: 0;
+}
+
+// ------------------------------------------------------------
+// 7. Accessibility
+// ------------------------------------------------------------
+
+// Respect the HTML hidden attribute.
 [hidden] {
   display: none !important;
 }

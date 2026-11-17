@@ -1,13 +1,11 @@
 // ============================================================
-// WATTLEBRIDGE — CONTAINER SYSTEM
+// WATTLEBRIDGE — GLOBAL CONTAINER
 // ============================================================
 
 .container {
   width: calc(100% - (2 * var(--space-gutter)));
   max-width: var(--container-max);
-  margin-inline: auto;
-}
 
-.container--narrow {
-  max-width: 52rem;
+  min-width: 0;
+  margin-inline: auto;
 }

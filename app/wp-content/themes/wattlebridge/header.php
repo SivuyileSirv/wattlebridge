@@ -18,19 +18,19 @@ defined('ABSPATH') || exit;
 </head>
 
 <body <?php body_class(); ?>>
-    <?php wp_body_open(); ?>
+  <?php wp_body_open(); ?>
 
   <a class="skip-link" href="#main-content">
     <?php esc_html_e('Skip to content', 'wattlebridge'); ?>
   </a>
 
-    <?php
-    $contact_page = get_page_by_path('contact');
+  <?php
+  $contact_page = get_page_by_path('contact');
 
-    $contact_url = $contact_page instanceof WP_Post
-      ? get_permalink($contact_page)
-      : home_url('/contact/');
-    ?>
+  $contact_url = $contact_page instanceof WP_Post
+    ? get_permalink($contact_page)
+    : home_url('/contact/');
+  ?>
 
   <header class="site-header" id="site-header">
     <div class="site-header__shell">
@@ -66,9 +66,13 @@ defined('ABSPATH') || exit;
           );
           ?>
 
+          <!-- Header CTA -->
           <a class="site-header__cta button button--primary" href="<?php echo esc_url($contact_url); ?>">
-            <?php esc_html_e('Get started', 'wattlebridge'); ?>
+            <span class="button__label">
+              <?php esc_html_e('Get started', 'wattlebridge'); ?>
+            </span>
           </a>
+
         </nav>
 
       </div>

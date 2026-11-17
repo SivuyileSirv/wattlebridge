@@ -4,6 +4,15 @@
 
 .site-header {
   --header-offset: 0px;
+  --header-logo-optical-offset: -1rem;
+  --header-cta-optical-offset: -0.2rem;
+  --header-toggle-optical-offset: 0.4rem;
+
+  // Mobile navigation animation settings.
+  --header-menu-duration: 350ms;
+  --header-menu-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-toggle-duration: 300ms;
+  --header-toggle-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
   position: fixed;
   top: var(--header-offset);
@@ -11,6 +20,7 @@
   z-index: 1000;
 
   width: 100%;
+  max-width: 100%;
   padding: 0;
 
   transition: padding var(--transition-standard);
@@ -46,7 +56,8 @@
       background-color var(--transition-standard),
       border-color var(--transition-standard),
       border-radius var(--transition-standard),
-      box-shadow var(--transition-standard);
+      box-shadow var(--transition-standard),
+      width var(--transition-standard);
   }
 
   &__inner {
@@ -79,6 +90,10 @@
     width: clamp(11.25rem, 18vw, 15rem);
     max-width: 100%;
     height: auto;
+
+    // Compensate for whitespace inside the SVG canvas.
+    // Applies to every viewport and both header states.
+    transform: translateX(var(--header-logo-optical-offset));
   }
 
   // ----------------------------------------------------------
@@ -89,6 +104,7 @@
     display: flex;
     align-items: center;
     gap: clamp(1.5rem, 3vw, 3rem);
+    min-width: 0;
   }
 
   &__menu {
@@ -113,14 +129,13 @@
     padding-block: 0.75rem;
 
     color: var(--color-ivory);
-    font-size: 0.95rem;
-    font-weight: 400;
+    font-size: var(--font-size-nav);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-nav);
+    letter-spacing: var(--letter-spacing-nav);
     text-decoration: none;
-
-    // Text colour stays unchanged on hover.
   }
 
-  // Underline — hidden by default
   &__menu a::after {
     position: absolute;
     right: 0;
@@ -139,20 +154,17 @@
     transition: transform 300ms ease;
   }
 
-  // Hover and keyboard focus — animate left to right
   &__menu a:hover::after,
   &__menu a:focus-visible::after {
     transform: scaleX(1);
   }
 
-  // Active page — underline remains visible
   &__menu .current-menu-item > a::after,
   &__menu .current_page_item > a::after,
   &__menu .current-menu-ancestor > a::after {
     transform: scaleX(1);
   }
 
-  // Text colour stays Ivory in every interaction state
   &__menu a:hover,
   &__menu a:focus-visible,
   &__menu .current-menu-item > a,
@@ -161,12 +173,59 @@
   }
 
   // ----------------------------------------------------------
-  // Header CTA — uses global button styles
+  // Header CTA
   // ----------------------------------------------------------
 
   &__cta {
+    position: relative;
+    isolation: isolate;
+
     flex-shrink: 0;
     white-space: nowrap;
+
+    // Optical alignment without changing layout flow.
+    transform: translateX(var(--header-cta-optical-offset));
+
+    color: var(--color-ink);
+
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-button);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-button);
+    letter-spacing: var(--letter-spacing-button);
+
+    text-decoration: none;
+
+    // Keep the text and icons above the circular reveal.
+    > span,
+    > svg,
+    > .button__icon {
+      position: relative;
+      z-index: 1;
+      color: inherit;
+    }
+
+    // Preserve Ink text on every interaction state.
+    &:link,
+    &:visited,
+    &:hover,
+    &:focus,
+    &:focus-visible,
+    &:active {
+      color: var(--color-ink);
+    }
+
+    // Match the border to the white reveal.
+    &:hover,
+    &:focus-visible {
+      border-color: #fff;
+    }
+
+    // Keyboard accessibility.
+    &:focus-visible {
+      outline: 3px solid var(--color-brass);
+      outline-offset: 4px;
+    }
   }
 
   // ----------------------------------------------------------
@@ -174,10 +233,16 @@
   // ----------------------------------------------------------
 
   &.is-scrolled {
-    padding: 0.75rem var(--space-gutter);
+    padding-block: 0.75rem;
+    padding-inline: 0;
   }
 
+  // Match the global container width.
   &.is-scrolled &__shell {
+    width: calc(100% - (2 * var(--space-gutter)));
+    max-width: var(--container-max);
+    margin-inline: auto;
+
     border-color: rgb(181 153 100 / 20%);
     border-radius: 9999px;
 
@@ -189,6 +254,15 @@
 
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
+  }
+
+  // The floating shell itself is now the content container.
+  // Remove any additional horizontal width constraint
+  // from the inner .container when scrolled.
+  &.is-scrolled &__inner.container {
+    width: 100%;
+    max-width: none;
+    padding-inline: clamp(1.25rem, 2vw, 2rem);
   }
 
   &.is-scrolled &__inner {
@@ -218,23 +292,49 @@
     color: var(--color-ivory);
 
     cursor: pointer;
+
+    transition:
+      background-color 250ms ease,
+      border-color 250ms ease,
+      color 250ms ease;
+
+    &:hover {
+      background-color: rgb(181 153 100 / 12%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-brass);
+      outline-offset: 4px;
+    }
   }
 
   &__toggle-line {
     display: block;
+    flex-shrink: 0;
 
     width: 20px;
     height: 2px;
 
+    border-radius: 9999px;
+
     background-color: currentColor;
 
+    // Keep all three lines on their own composited layers
+    // for smoother rotation and movement.
+    transform: translateY(0) rotate(0deg);
+    transform-origin: center center;
+
+    opacity: 1;
+
+    backface-visibility: hidden;
+
     transition:
-      transform var(--transition-fast),
-      opacity var(--transition-fast);
+      transform var(--header-toggle-duration) var(--header-toggle-easing),
+      opacity 200ms ease;
   }
 
   // ----------------------------------------------------------
-  // Tablet and mobile
+  // Tablet and mobile — up to 1023px
   // ----------------------------------------------------------
 
   @media (max-width: 63.999rem) {
@@ -247,8 +347,17 @@
     }
 
     &__toggle {
+      position: relative;
+
+      // Move the entire circular hamburger button right.
+      left: var(--header-toggle-optical-offset);
+
       display: flex;
     }
+
+    // --------------------------------------------------------
+    // Mobile navigation — closed state
+    // --------------------------------------------------------
 
     &__navigation {
       position: absolute;
@@ -257,7 +366,8 @@
       left: var(--space-gutter);
       z-index: 10;
 
-      display: none;
+      // Keep the element rendered so CSS can animate it.
+      display: flex;
       align-items: stretch;
       flex-direction: column;
       gap: 1.25rem;
@@ -270,11 +380,41 @@
       background-color: rgb(23 61 54 / 97%);
 
       box-shadow: 0 15px 35px rgb(0 0 0 / 18%);
+
+      // Closed animation state.
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transform: translate3d(0, -12px, 0) scale(0.98);
+      transform-origin: top center;
+
+      transition:
+        opacity var(--header-menu-duration) var(--header-menu-easing),
+        transform var(--header-menu-duration) var(--header-menu-easing),
+        visibility 0s linear var(--header-menu-duration);
     }
 
+    // --------------------------------------------------------
+    // Mobile navigation — open state
+    // --------------------------------------------------------
+
     &.is-menu-open &__navigation {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transform: translate3d(0, 0, 0) scale(1);
+
+      transition:
+        opacity var(--header-menu-duration) var(--header-menu-easing),
+        transform var(--header-menu-duration) var(--header-menu-easing),
+        visibility 0s linear 0s;
     }
+
+    // --------------------------------------------------------
+    // Mobile menu layout
+    // --------------------------------------------------------
 
     &__menu {
       align-items: stretch;
@@ -287,7 +427,6 @@
       padding: 0.65rem 0;
     }
 
-    // Keep the underline aligned with each menu item
     &__menu a::after {
       right: auto;
       width: 100%;
@@ -297,13 +436,17 @@
       width: 100%;
     }
 
-    // Hamburger animation
+    // --------------------------------------------------------
+    // Hamburger — smooth transformation into an X
+    // --------------------------------------------------------
+
     &.is-menu-open &__toggle-line:nth-child(1) {
       transform: translateY(7px) rotate(45deg);
     }
 
     &.is-menu-open &__toggle-line:nth-child(2) {
       opacity: 0;
+      transform: scaleX(0);
     }
 
     &.is-menu-open &__toggle-line:nth-child(3) {
@@ -329,9 +472,17 @@
     &,
     &__shell,
     &__inner,
+    &__toggle,
     &__toggle-line,
     &__menu a::after {
       transition: none;
+    }
+
+    @media (max-width: 63.999rem) {
+      &__navigation,
+      &.is-menu-open &__navigation {
+        transition: none;
+      }
     }
   }
 }
@@ -339,7 +490,6 @@
 // ------------------------------------------------------------
 // Temporary contrast for unfinished internal pages
 // ------------------------------------------------------------
-// Remove when their hero sections have been implemented.
 
 body:not(.home) .site-header:not(.is-scrolled) .site-header__shell {
   background-color: var(--color-forest);

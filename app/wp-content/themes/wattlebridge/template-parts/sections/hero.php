@@ -2,10 +2,8 @@
 /**
  * Homepage hero section.
  *
- * The heading, description and photograph are editable
- * through Secure Custom Fields (SCF).
- *
- * Button labels, destinations and icons are theme-controlled.
+ * Heading, description and image are editable through SCF.
+ * Button labels and destinations are theme-controlled.
  *
  * @package Wattlebridge
  */
@@ -74,14 +72,14 @@ $contact_url = $contact_page instanceof WP_Post
         $image_id,
         'full',
         false,
-        array(
+        [
           'class' => 'hero__image',
           'alt' => '',
           'loading' => 'eager',
           'fetchpriority' => 'high',
           'decoding' => 'async',
           'sizes' => '100vw',
-        )
+        ]
       );
       ?>
     </div>
@@ -92,6 +90,7 @@ $contact_url = $contact_page instanceof WP_Post
   <div class="hero__container container">
     <div class="hero__content">
 
+      <!-- Main page heading: H1 -->
       <h1 class="hero__title" id="hero-heading">
         <?php echo esc_html($heading); ?>
       </h1>
@@ -103,7 +102,7 @@ $contact_url = $contact_page instanceof WP_Post
       <div class="hero__actions">
 
         <a class="button button--primary" href="<?php echo esc_url($employers_url); ?>">
-          <span>For employers</span>
+          <span>Employer start here</span>
 
           <span class="button__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" focusable="false">
@@ -114,7 +113,7 @@ $contact_url = $contact_page instanceof WP_Post
         </a>
 
         <a class="button button--outline-light" href="<?php echo esc_url($contact_url); ?>">
-          <span>For candidates</span>
+          <span>Candidate start here</span>
 
           <span class="button__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" focusable="false">

@@ -6,6 +6,22 @@ The project focuses on a custom-built, responsive homepage with modular PHP temp
 
 The theme is built without a page builder or front-end JavaScript framework.
 
+## Responsive Preview
+
+The homepage has been implemented with responsive layouts for desktop, tablet and mobile viewports.
+
+### Desktop
+
+![Wattlebridge homepage — desktop](docs/screenshots/desktop-view-fullpage.png)
+
+### Tablet
+
+![Wattlebridge homepage — tablet](docs/screenshots/tablet-view-fullpage.png)
+
+### Mobile
+
+![Wattlebridge homepage — mobile](docs/screenshots/mobile-view-fullpage.png)
+
 ## Technology Stack
 
 - WordPress — minimum version 6.6

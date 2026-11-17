@@ -14,8 +14,7 @@ get_header();
 
   <?php
   // Hero — always rendered first.
-  get_template_part('template-parts/sections/hero');
-  ?>
+  get_template_part('template-parts/sections/hero'); ?>
 
   <?php
   // Our Approach Section
@@ -28,10 +27,6 @@ get_header();
   <?php
   // Pathways Section
   get_template_part('template-parts/sections/pathways'); ?>
-
-  <?php
-
-  ?>
 
 </main>
 

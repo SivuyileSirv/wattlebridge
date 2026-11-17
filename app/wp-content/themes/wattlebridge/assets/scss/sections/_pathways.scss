@@ -1,0 +1,241 @@
+// ============================================================
+// WATTLEBRIDGE — EMPLOYER & CANDIDATE PATHWAYS
+// ============================================================
+
+.pathways {
+  background-color: var(--color-ivory);
+  padding-block: clamp(3.5rem, 6vw, 6rem);
+
+  // ----------------------------------------------------------
+  // Two-column layout
+  // ----------------------------------------------------------
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  // ----------------------------------------------------------
+  // Image card
+  // ----------------------------------------------------------
+
+  &__card {
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    min-width: 0;
+    min-height: clamp(26rem, 38vw, 34rem);
+
+    overflow: hidden;
+
+    border-radius: 8px;
+    background-color: var(--color-forest);
+    color: #fff;
+
+    // Forest overlay — darker toward the bottom
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+
+      background: linear-gradient(
+        180deg,
+        rgba(23, 61, 54, 0.3) 0%,
+        rgba(23, 61, 54, 0.48) 40%,
+        rgba(12, 43, 35, 0.92) 100%
+      );
+
+      pointer-events: none;
+    }
+  }
+
+  // ----------------------------------------------------------
+  // Background photograph
+  // ----------------------------------------------------------
+
+  &__image {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 500ms ease;
+  }
+
+  &__card:hover &__image {
+    transform: scale(1.035);
+  }
+
+  // ----------------------------------------------------------
+  // Content — anchored to the bottom
+  // ----------------------------------------------------------
+
+  &__content {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 100%;
+    padding: clamp(1.75rem, 3vw, 3rem);
+  }
+
+  &__heading {
+    max-width: 100%;
+    margin: 0 0 0.875rem;
+
+    color: #fff;
+
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+
+    text-wrap: balance;
+  }
+
+  &__card--candidate &__heading {
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+
+  &__description {
+    max-width: 42ch;
+    margin: 0 0 1.75rem;
+
+    color: #fff;
+
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-regular);
+    line-height: 1.6;
+  }
+
+  // ----------------------------------------------------------
+  // Brass pill CTA
+  // ----------------------------------------------------------
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.875rem;
+
+    min-height: 3rem;
+    padding: 0.875rem 1.5rem;
+
+    border: 1px solid var(--color-brass);
+    border-radius: 999px;
+
+    background-color: var(--color-brass);
+    color: var(--color-ink);
+
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: var(--letter-spacing-button);
+
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
+    }
+  }
+
+  &__button-arrow {
+    display: block;
+    flex: 0 0 auto;
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  // ----------------------------------------------------------
+  // Tablet
+  // ----------------------------------------------------------
+
+  @media (max-width: 1024px) {
+    &__card {
+      min-height: 30rem;
+    }
+
+    &__content {
+      padding: 2rem;
+    }
+
+    &__card--candidate &__heading {
+      white-space: normal;
+      text-wrap: balance;
+    }
+
+    &__description {
+      font-size: 0.9375rem;
+    }
+  }
+
+  // ----------------------------------------------------------
+  // Mobile
+  // ----------------------------------------------------------
+
+  @media (max-width: 767px) {
+    padding-block: 3.5rem;
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    &__card {
+      min-height: 29rem;
+    }
+
+    &__content {
+      padding: 1.75rem;
+    }
+
+    &__description {
+      max-width: 100%;
+      font-size: 0.9375rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__button {
+      min-height: 3.125rem;
+      padding-inline: 1.5rem;
+    }
+  }
+
+  // ----------------------------------------------------------
+  // Reduced motion
+  // ----------------------------------------------------------
+
+  @media (prefers-reduced-motion: reduce) {
+    &__image {
+      transition: none;
+    }
+
+    &__card:hover &__image {
+      transform: none;
+    }
+  }
+}

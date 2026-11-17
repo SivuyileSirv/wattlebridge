@@ -13,19 +13,24 @@ get_header();
 <main id="main-content" class="site-main">
 
   <?php
-  // Fixed homepage hero — always rendered first.
+  // Hero — always rendered first.
   get_template_part('template-parts/sections/hero');
   ?>
 
   <?php
-  /**
-   * Reorderable homepage sections will be rendered here.
-   *
-   * Future SCF Flexible Content field:
-   * homepage_sections
-   *
-   * The hero will remain outside that loop.
-   */
+  // Our Approach Section
+  get_template_part('template-parts/sections/approach'); ?>
+
+  <?php
+  // Services Section
+  get_template_part('template-parts/sections/services'); ?>
+
+  <?php
+  // Pathways Section
+  get_template_part('template-parts/sections/pathways'); ?>
+
+  <?php
+
   ?>
 
 </main>
